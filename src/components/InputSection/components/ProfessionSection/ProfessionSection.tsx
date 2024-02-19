@@ -1,10 +1,9 @@
 import { FC, useEffect, useState } from 'react'
 import ProfessionItem from './components/ProfessionItem'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import titleGenerator from '@/utils/titleGenerator'
 import { Field, Fields } from '@/types/Fields'
 import _ from 'lodash'
-import Quill from '@/components/Quill'
+import DisplayItem from './components/DisplayItem'
 
 interface ProfessionSectionProps {
   initData: Fields
@@ -44,7 +43,6 @@ const ProfessionSection: FC<ProfessionSectionProps> = (props) => {
       field.editMode = false
     })
     setFields(newFields)
-    console.log(index, fields[index], fields[index].editMode)
     dispatch({
       type: `data/update${type}`,
       payload: { index, data: fields[index] },
@@ -72,6 +70,11 @@ const ProfessionSection: FC<ProfessionSectionProps> = (props) => {
     setFields(newFields)
   }
 
+  const handleEditClick = (index: number) => {
+    const newFields = fields.map((field) => ({ ...field }))
+    newFields[index].editMode = true
+    setFields(newFields)
+  }
   return (
     <>
       {fields.map((field, index) =>
@@ -92,28 +95,10 @@ const ProfessionSection: FC<ProfessionSectionProps> = (props) => {
           <div
             key={`display-${index}`}
             className="flex flex-row gap-2 items-center justify-between">
-            <div className="w-full">
-              <div className="flex items-center gap-10">
-                <div>
-                  {titleGenerator(field)}
-                  <p>{`${field.data.startDate?.value} - ${
-                    field.data.endDate?.value || 'current'
-                  }`}</p>
-                </div>
-
-                <img
-                  className="w-6 h-6"
-                  src="/src/assets/edit.svg"
-                  alt="edit"
-                  onClick={() => {
-                    const newFields = fields.map((field) => ({ ...field }))
-                    newFields[index].editMode = true
-                    setFields(newFields)
-                  }}
-                />
-              </div>
-              <Quill value={field.description} />
-            </div>
+            <DisplayItem
+              field={field}
+              openEdit={() => handleEditClick(index)}
+            />
           </div>
         )
       )}
