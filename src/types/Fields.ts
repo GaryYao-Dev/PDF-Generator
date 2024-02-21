@@ -4,6 +4,7 @@ export type Fields = {
     role?: Field
     department?: Field
     location?: Field
+    type?: Field
     startDate?: Field
     endDate?: Field
   }

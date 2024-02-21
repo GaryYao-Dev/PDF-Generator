@@ -21,6 +21,12 @@ const professionInitData: Fields = {
       required: false,
       value: '',
     },
+    type: {
+      label: 'Type(Full-time, Part-time, etc.)',
+      type: 'text',
+      required: false,
+      value: '',
+    },
     startDate: {
       label: 'Start Date',
       type: 'date',
