@@ -18,10 +18,13 @@ const Quill: FC<QuillProps> = (props) => {
   return (
     <StyledQuillContainer readOnly={readOnly}>
       <ReactQuill
-        theme={readOnly ? 'bubble' : 'snow'}
+        readOnly={readOnly}
+        modules={{
+          toolbar: !readOnly, // or your custom toolbar configuration
+        }}
         value={value}
         onChange={setValue}
-        readOnly={readOnly}
+        bounds={document.body}
       />
     </StyledQuillContainer>
   )

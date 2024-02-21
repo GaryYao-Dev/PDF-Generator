@@ -15,11 +15,13 @@ const DisplayItem: FC<DisplayItemProps> = (props) => {
       <div className="flex items-center gap-10 px-2">
         <div>
           <div className="text-xl font-semibold">{titleGenerator(field)}</div>
-          <p>{`${dayjs(field.data.startDate?.value).format('MM/YYYY')} - ${
-            field.data.endDate?.value
-              ? dayjs(field.data.endDate?.value).format('MM/YYYY')
-              : 'current'
-          }`}</p>
+          {field.data.startDate?.value && (
+            <p>{`${dayjs(field.data.startDate?.value).format('MM/YYYY')} - ${
+              field.data.endDate?.value
+                ? dayjs(field.data.endDate?.value).format('MM/YYYY')
+                : 'current'
+            }`}</p>
+          )}
         </div>
         <img
           className="w-6 h-6"

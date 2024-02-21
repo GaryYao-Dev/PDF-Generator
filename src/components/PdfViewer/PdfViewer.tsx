@@ -54,7 +54,7 @@ Font.register({
 const PdfViewer: FC = () => {
   // const {} = props
   const data = useAppSelector((state) => state.data)
-  const { personalDetail, summary, skills, profession, education, project } =
+  const { personalDetail, summary, skill, profession, education, project } =
     data
 
   const personalInfoFisrtLine: string[] = []
@@ -89,29 +89,55 @@ const PdfViewer: FC = () => {
               </Text>
             </View>
           </View>
-          <View style={styles.section}>
-            <Text style={styles.title}>{'PERSONAL SUMMARY'}</Text>
-            <Divider />
-            <View>
-              <StyledText
-                text={summary ?? ''}
-                styleProp={{
-                  paragraph: { fontSize: '12px' },
-                  container: { margin: '2px 8px' },
-                }}
-              />
-            </View>
-          </View>
 
-          <View style={styles.section}>
+          {summary && (
+            <View style={styles.section}>
+              <Text style={styles.title}>{'PERSONAL SUMMARY'}</Text>
+              <Divider />
+              <View>
+                <StyledText
+                  text={summary}
+                  styleProp={{
+                    paragraph: { fontSize: '12px' },
+                    container: { margin: '2px 8px' },
+                  }}
+                />
+              </View>
+            </View>
+          )}
+
+          {/* <View style={styles.section}>
             <Text style={styles.title}>{'SKILLS'}</Text>
             <Divider />
-            {skills.map((skill, index) => (
+            {skill.map((skillItem, index) => (
               <View key={`skill-${index}`} style={{ marginVertical: '2px' }}>
-                <Text style={styles.skillTitle}>{skill.title}</Text>
-                <Text style={styles.skillContent}>{skill.content}</Text>
+                <Text style={styles.skillTitle}>{skillItem.title}</Text>
+                <Text style={styles.skillContent}>{skillItem.content}</Text>
               </View>
             ))}
+          </View> */}
+
+          <View style={styles.section}>
+            <Text style={styles.title}>{'SKILL'}</Text>
+            <Divider />
+            {skill &&
+              skill.length > 0 &&
+              skill.map((item, index) => (
+                <View
+                  key={`profession-${index}`}
+                  style={{ marginVertical: '2px' }}>
+                  <Text style={styles.skillTitle}>{titleGenerator(item)}</Text>
+                  <View style={{marginHorizontal: '12px'}}>
+                    <StyledText
+                      text={item.description}
+                      styleProp={{
+                        paragraph: { fontSize: '12px' },
+                        container: { marginVertical: '2px' },
+                      }}
+                    />
+                  </View>
+                </View>
+              ))}
           </View>
 
           <View style={styles.section}>
@@ -154,7 +180,7 @@ const PdfViewer: FC = () => {
                       styleProp={{
                         paragraph: { fontSize: '12px' },
                         container: { marginVertical: '0px' },
-                        list: {marginVertical: '2px'}
+                        list: { marginVertical: '2px' },
                       }}
                     />
                   </View>

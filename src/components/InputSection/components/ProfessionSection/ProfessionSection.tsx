@@ -8,10 +8,11 @@ import DisplayItem from './components/DisplayItem'
 interface ProfessionSectionProps {
   initData: Fields
   type: string
+  title: string
 }
 
 const ProfessionSection: FC<ProfessionSectionProps> = (props) => {
-  const { initData, type } = props
+  const { initData, type, title: sectionTitle } = props
   const dispatch = useAppDispatch()
   const profession = useAppSelector(
     (state) =>
@@ -77,6 +78,9 @@ const ProfessionSection: FC<ProfessionSectionProps> = (props) => {
   }
   return (
     <>
+      <h2 className="my-4 relative before:content-[''] before:absolute before:-left-2 before:top-1 before:w-[3px] before:h-6 before:bg-blue-500">
+        {sectionTitle}
+      </h2>
       {fields.map((field, index) =>
         field.editMode ? (
           <ProfessionItem

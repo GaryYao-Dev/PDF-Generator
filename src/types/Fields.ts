@@ -32,7 +32,7 @@ export type PersonalDetail = {
   }
 }
 
-export type Skill = {
-  title: string
-  content: string
-}
+// export type Skill = {
+//   title: string
+//   content: string
+// }

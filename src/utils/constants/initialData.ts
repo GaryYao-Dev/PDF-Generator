@@ -1,4 +1,4 @@
-import { Fields, Skill } from '@/types/Fields'
+import { Fields } from '@/types/Fields'
 
 const professionInitData: Fields = {
   data: {
@@ -103,9 +103,12 @@ const educationInitData: Fields = {
   description: '',
 }
 
-const skillInitData: Skill = {
-  title: '',
-  content: '',
+const skillInitData: Fields = {
+  data: {
+    place: { label: 'Title', type: 'text', required: true, value: '' },
+  },
+  editMode: true,
+  description: '',
 }
 
 export { professionInitData, projectInitData, educationInitData, skillInitData }

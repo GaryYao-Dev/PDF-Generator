@@ -1,4 +1,4 @@
-import { Fields, PersonalDetail, Skill } from '@/types/Fields'
+import { Fields, PersonalDetail } from '@/types/Fields'
 import { createSlice } from '@reduxjs/toolkit'
 
 const dataSlice = createSlice({
@@ -6,7 +6,7 @@ const dataSlice = createSlice({
   initialState: {
     personalDetail: <PersonalDetail>{},
     summary: '',
-    skills: <Skill[]>[],
+    skill: <Fields[]>[],
     profession: <Fields[]>[],
     education: <Fields[]>[],
     project: <Fields[]>[],
@@ -24,16 +24,28 @@ const dataSlice = createSlice({
     updateSummary: (state, action) => {
       state.summary = action.payload
     },
+    // addSkill: (state, action) => {
+    //   const current = state.skills
+    //   const newSkill = [...current, action.payload]
+    //   state.skills = newSkill
+    // },
+    // deleteSkill: (state, action) => {
+    //   state.skills.splice(action.payload, 1)
+    // },
+    // updateSkill: (state, action) => {
+    //   state.skills = action.payload
+    // },
     addSkill: (state, action) => {
-      const current = state.skills
+      const current = state.skill
       const newSkill = [...current, action.payload]
-      state.skills = newSkill
+      state.skill = newSkill
     },
     deleteSkill: (state, action) => {
-      state.skills.splice(action.payload, 1)
+      state.skill.splice(action.payload, 1)
     },
     updateSkill: (state, action) => {
-      state.skills = action.payload
+      state.skill[action.payload.index] = action.payload.data
+      state.skill[action.payload.index].editMode = false
     },
     addProfession: (state, action) => {
       const current = state.profession
