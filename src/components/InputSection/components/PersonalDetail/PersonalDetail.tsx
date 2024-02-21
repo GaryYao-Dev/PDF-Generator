@@ -55,8 +55,11 @@ const personalDetailFields = {
     },
   },
 }
-
-const PersonalDetail: FC = () => {
+interface PersonalDetailProps {
+  title: string
+}
+const PersonalDetail: FC<PersonalDetailProps> = (props) => {
+  const { title } = props
   const dispatch = useAppDispatch()
   const initPersonalDetail = useAppSelector(
     (state) => state.data.personalDetail
@@ -69,7 +72,6 @@ const PersonalDetail: FC = () => {
     }
   }, [initPersonalDetail])
 
-  
   const handleChange = (index: number, name: string, value: string) => {
     const newFields = _.cloneDeep(fields)
     Object.entries(newFields.data).forEach(([key, field]) => {
@@ -84,12 +86,17 @@ const PersonalDetail: FC = () => {
     dispatch(updatePersonalDetail(fields))
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <FieldMap fields={fields} setFields={handleChange} />
-      <div className="flex justify-end">
-        <input type="submit" className="btn-primary" value="Save" />
-      </div>
-    </form>
+    <>
+      <h2 className="my-4 relative before:content-[''] before:absolute before:-left-2 before:top-1 before:w-[3px] before:h-6 before:bg-blue-500">
+        {title}
+      </h2>
+      <form onSubmit={handleSubmit}>
+        <FieldMap fields={fields} setFields={handleChange} />
+        <div className="flex justify-end">
+          <input type="submit" className="btn-primary" value="Save" />
+        </div>
+      </form>
+    </>
   )
 }
 
