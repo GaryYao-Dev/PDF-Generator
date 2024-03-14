@@ -7,7 +7,6 @@ WORKDIR /usr/src/app
 # Copy package.json, package-lock.json, and yarn.lock into the Docker container
 COPY package*.json yarn.lock ./
 
-RUN npm install -g yarn
 # Install the application dependencies using Yarn
 RUN yarn install
 
