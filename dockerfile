@@ -1,19 +1,24 @@
+# Use an official Node.js runtime as the base image
 FROM node:18.19.0
 
-# 设置工作目录
+# Set the working directory in the Docker container
 WORKDIR /usr/src/app
 
-# 将 package.json 和 package-lock.json 复制到容器中
-COPY package*.json ./
+# Copy package.json, package-lock.json, and yarn.lock into the Docker container
+COPY package*.json yarn.lock ./
 
-# 安装依赖项
-RUN npm install
+RUN npm install -g yarn
+# Install the application dependencies using Yarn
+RUN yarn install
 
-# 将整个应用程序复制到容器中
+# Install serve globally in the Docker container using Yarn
+RUN yarn global add serve
+
+# Copy the entire application into the Docker container
 COPY . .
 
-# 暴露端口
+# Expose port 5000 (default port for serve) on the Docker container
 EXPOSE 3000
 
-# 运行应用程序
-CMD npm run build && npm run start_server
+# Build the application and start the server when the Docker container is run
+CMD yarn run build && serve -s dist -l 3000
