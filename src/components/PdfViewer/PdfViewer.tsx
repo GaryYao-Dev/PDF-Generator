@@ -106,28 +106,21 @@ const PdfViewer: FC = () => {
             </View>
           )}
 
-          {/* <View style={styles.section}>
-            <Text style={styles.title}>{'SKILLS'}</Text>
-            <Divider />
-            {skill.map((skillItem, index) => (
-              <View key={`skill-${index}`} style={{ marginVertical: '2px' }}>
-                <Text style={styles.skillTitle}>{skillItem.title}</Text>
-                <Text style={styles.skillContent}>{skillItem.content}</Text>
-              </View>
-            ))}
-          </View> */}
-
           <View style={styles.section}>
             <Text style={styles.title}>{'SKILL'}</Text>
             <Divider />
             {skill &&
               skill.length > 0 &&
               skill.map((item, index) => (
-                <View
-                  key={`profession-${index}`}
-                  style={{ marginVertical: '2px' }}>
-                  <Text style={styles.skillTitle}>{titleGenerator(item)}</Text>
-                  <View style={{marginHorizontal: '12px'}}>
+                <View key={`profession-${index}`} style={styles.skill}>
+                  <View style={styles.skillTitle}>
+                    <Text>{titleGenerator(item)}</Text>
+                  </View>
+                  <View
+                    style={{
+                      marginLeft: '4px',
+                      width: '100%',
+                    }}>
                     <StyledText
                       text={item.description}
                       styleProp={{
@@ -135,6 +128,7 @@ const PdfViewer: FC = () => {
                         container: { marginVertical: '2px' },
                       }}
                     />
+                    V
                   </View>
                 </View>
               ))}
@@ -149,7 +143,7 @@ const PdfViewer: FC = () => {
                 <View
                   key={`profession-${index}`}
                   style={{ marginVertical: '8px' }}>
-                  <Text style={styles.skillTitle}>
+                  <Text style={styles.subTitle}>
                     {titleGenerator(professionItem)}
                   </Text>
 
@@ -197,7 +191,7 @@ const PdfViewer: FC = () => {
                 <View
                   key={`profession-${index}`}
                   style={{ marginVertical: '8px' }}>
-                  <Text style={styles.skillTitle}>{titleGenerator(item)}</Text>
+                  <Text style={styles.subTitle}>{titleGenerator(item)}</Text>
 
                   {item.data.startDate?.value && (
                     <Text style={styles.itemSubTitle}>
@@ -240,7 +234,7 @@ const PdfViewer: FC = () => {
                 <View
                   key={`profession-${index}`}
                   style={{ marginVertical: '8px' }}>
-                  <Text style={styles.skillTitle}>{titleGenerator(item)}</Text>
+                  <Text style={styles.subTitle}>{titleGenerator(item)}</Text>
 
                   {item.data.startDate?.value && (
                     <Text style={styles.itemSubTitle}>
@@ -292,6 +286,11 @@ const styles = StyleSheet.create({
   section: {
     marginVertical: '4px',
   },
+  skill: {
+    marginVertical: '4px',
+    display: 'flex',
+    flexDirection: 'row',
+  },
   title: {
     fontWeight: 800,
     fontSize: '16px',
@@ -307,7 +306,19 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
   },
-  skillTitle: { fontSize: '14px', fontWeight: 600, marginLeft: '4px' },
+  subTitle: {
+    fontSize: '14px',
+    fontWeight: 600,
+    marginLeft: '4px',
+  },
+  skillTitle: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '14px',
+    fontWeight: 600,
+    minWidth: '104px',
+  },
   skillContent: { fontSize: '12px', marginLeft: '12px' },
   itemSubTitle: {
     fontSize: '12px',
