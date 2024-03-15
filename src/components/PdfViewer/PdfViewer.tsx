@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   skillTitle: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     fontSize: '14px',
     fontWeight: 600,
     minWidth: '104px',
