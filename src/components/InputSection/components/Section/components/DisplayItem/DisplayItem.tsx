@@ -3,7 +3,6 @@ import { Fields } from '@/types/Fields'
 import titleGenerator from '@/utils/titleGenerator'
 import dayjs from 'dayjs'
 import { FC } from 'react'
-
 interface DisplayItemProps {
   field: Fields
   openEdit: () => void
@@ -25,7 +24,7 @@ const DisplayItem: FC<DisplayItemProps> = (props) => {
         </div>
         <img
           className="w-6 h-6"
-          src="/src/assets/edit.svg"
+          src="/assets/edit.svg"
           alt="edit"
           onClick={openEdit}
         />
