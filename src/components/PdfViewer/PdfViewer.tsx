@@ -14,6 +14,7 @@ import StyledText from './components/StyledText'
 import Divider from './components/Divider'
 import titleGenerator from '@/utils/titleGenerator'
 import dayjs from 'dayjs'
+import Footer from './components/Footer'
 
 // interface PdfViewerProps {
 
@@ -79,194 +80,198 @@ const PdfViewer: FC = () => {
     <PDFViewer width={'100%'} height={'100%'}>
       <Document>
         <Page size="A4" style={styles.page}>
-          <View style={styles.section}>
-            <Text style={styles.name}>
-              {personalDetail.data?.name.value || ''}
-            </Text>
-            <View style={styles.personalInfo}>
-              <Text style={{ textAlign: 'center', fontSize: '12px' }}>
-                {personalInfo}
-              </Text>
-            </View>
-          </View>
-
-          {summary && (
+          <View style={{ flex: 1 }}>
             <View style={styles.section}>
-              <Text style={styles.title}>{'PERSONAL SUMMARY'}</Text>
-              <Divider />
-              <View>
-                <StyledText
-                  text={summary}
-                  styleProp={{
-                    paragraph: { fontSize: '12px' },
-                    container: { margin: '2px 8px' },
-                  }}
-                />
+              <Text style={styles.name}>
+                {personalDetail.data?.name.value || ''}
+              </Text>
+              <View style={styles.personalInfo}>
+                <Text style={{ textAlign: 'center', fontSize: '12px' }}>
+                  {personalInfo}
+                </Text>
               </View>
             </View>
-          )}
 
-          <View style={styles.section}>
-            <Text style={styles.title}>{'SKILL'}</Text>
-            <Divider />
-            {skill &&
-              skill.length > 0 &&
-              skill.map((item, index) => (
-                <View key={`profession-${index}`} style={styles.skill}>
-                  <View style={styles.skillTitle}>
-                    <Text>{titleGenerator(item)}</Text>
+            {summary && (
+              <View style={styles.section}>
+                <Text style={styles.title}>{'PERSONAL SUMMARY'}</Text>
+                <Divider />
+                <View>
+                  <StyledText
+                    text={summary}
+                    styleProp={{
+                      paragraph: { fontSize: '12px' },
+                      container: { margin: '2px 8px' },
+                    }}
+                  />
+                </View>
+              </View>
+            )}
+
+            {skill && skill.length > 0 && (
+              <View style={styles.section}>
+                <Text style={styles.title}>{'SKILL'}</Text>
+                <Divider />
+                {skill.map((item, index) => (
+                  <View key={`profession-${index}`} style={styles.skill}>
+                    <View style={styles.skillTitle}>
+                      <Text>{titleGenerator(item)}</Text>
+                    </View>
+                    <View
+                      style={{
+                        marginLeft: '4px',
+                        width: '100%',
+                      }}>
+                      <StyledText
+                        text={item.description}
+                        styleProp={{
+                          paragraph: { fontSize: '12px' },
+                          container: { marginVertical: '2px' },
+                        }}
+                      />
+                      V
+                    </View>
                   </View>
+                ))}
+              </View>
+            )}
+
+            {profession && profession.length > 0 && (
+              <View style={styles.section}>
+                <Text style={styles.title}>{'PROFESSIONAL EXPERIENCE'}</Text>
+                <Divider />
+                {profession.map((professionItem, index) => (
                   <View
-                    style={{
-                      marginLeft: '4px',
-                      width: '100%',
-                    }}>
-                    <StyledText
-                      text={item.description}
-                      styleProp={{
-                        paragraph: { fontSize: '12px' },
-                        container: { marginVertical: '2px' },
-                      }}
-                    />
-                    V
-                  </View>
-                </View>
-              ))}
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.title}>{'PROFESSIONAL EXPERIENCE'}</Text>
-            <Divider />
-            {profession &&
-              profession.length > 0 &&
-              profession.map((professionItem, index) => (
-                <View
-                  key={`profession-${index}`}
-                  style={{ marginVertical: '8px' }}>
-                  <Text style={styles.subTitle}>
-                    {titleGenerator(professionItem)}
-                  </Text>
-
-                  {professionItem.data.startDate?.value && (
-                    <Text style={styles.itemSubTitle}>
-                      {`${dayjs(professionItem.data.startDate.value).format(
-                        'MM/YYYY'
-                      )} - ${
-                        professionItem.data.endDate?.value
-                          ? dayjs(professionItem.data.endDate.value).format(
-                              'MM/YYYY'
-                            )
-                          : 'Present'
-                      }${
-                        professionItem.data.type?.value
-                          ? ' | ' + professionItem.data.type?.value
-                          : ''
-                      }${
-                        professionItem.data.location?.value
-                          ? ' | ' + professionItem.data.location?.value
-                          : ''
-                      }`}
+                    key={`profession-${index}`}
+                    style={{ marginVertical: '8px' }}>
+                    <Text style={styles.subTitle}>
+                      {titleGenerator(professionItem)}
                     </Text>
-                  )}
-                  <View style={styles.itemDescription}>
-                    <StyledText
-                      text={professionItem.description}
-                      styleProp={{
-                        paragraph: { fontSize: '12px' },
-                        container: { marginVertical: '0px' },
-                        list: { marginVertical: '2px' },
-                      }}
-                    />
+
+                    {professionItem.data.startDate?.value && (
+                      <Text style={styles.itemSubTitle}>
+                        {`${dayjs(professionItem.data.startDate.value).format(
+                          'MM/YYYY'
+                        )} - ${
+                          professionItem.data.endDate?.value
+                            ? dayjs(professionItem.data.endDate.value).format(
+                                'MM/YYYY'
+                              )
+                            : 'Present'
+                        }${
+                          professionItem.data.type?.value
+                            ? ' | ' + professionItem.data.type?.value
+                            : ''
+                        }${
+                          professionItem.data.location?.value
+                            ? ' | ' + professionItem.data.location?.value
+                            : ''
+                        }`}
+                      </Text>
+                    )}
+                    <View style={styles.itemDescription}>
+                      <StyledText
+                        text={professionItem.description}
+                        styleProp={{
+                          paragraph: { fontSize: '12px' },
+                          container: { marginVertical: '0px' },
+                          list: { marginVertical: '2px' },
+                        }}
+                      />
+                    </View>
                   </View>
-                </View>
-              ))}
+                ))}
+              </View>
+            )}
+
+            {project && project.length > 0 && (
+              <View style={styles.section}>
+                <Text style={styles.title}>{'PROJECT EXPERIENCE'}</Text>
+                <Divider />
+                {project.map((item, index) => (
+                  <View
+                    key={`profession-${index}`}
+                    style={{ marginVertical: '8px' }}>
+                    <Text style={styles.subTitle}>{titleGenerator(item)}</Text>
+
+                    {item.data.startDate?.value && (
+                      <Text style={styles.itemSubTitle}>
+                        {`${dayjs(item.data.startDate.value).format(
+                          'MM/YYYY'
+                        )} - ${
+                          item.data.endDate?.value
+                            ? dayjs(item.data.endDate.value).format('MM/YYYY')
+                            : 'Present'
+                        }${
+                          item.data.type?.value
+                            ? ' | ' + item.data.type?.value
+                            : ''
+                        }${
+                          item.data.location?.value
+                            ? ' | ' + item.data.location?.value
+                            : ''
+                        }`}
+                      </Text>
+                    )}
+                    <View style={styles.itemDescription}>
+                      <StyledText
+                        text={item.description}
+                        styleProp={{
+                          paragraph: { fontSize: '12px' },
+                          container: { marginVertical: '2px' },
+                        }}
+                      />
+                    </View>
+                  </View>
+                ))}
+              </View>
+            )}
+
+            {education && education.length > 0 && (
+              <View style={styles.section}>
+                <Text style={styles.title}>{'EDUCATION'}</Text>
+                <Divider />
+                {education.map((item, index) => (
+                  <View
+                    key={`profession-${index}`}
+                    style={{ marginVertical: '8px' }}>
+                    <Text style={styles.subTitle}>{titleGenerator(item)}</Text>
+
+                    {item.data.startDate?.value && (
+                      <Text style={styles.itemSubTitle}>
+                        {`${dayjs(item.data.startDate.value).format(
+                          'MM/YYYY'
+                        )} - ${
+                          item.data.endDate?.value
+                            ? dayjs(item.data.endDate.value).format('MM/YYYY')
+                            : 'Present'
+                        }${
+                          item.data.type?.value
+                            ? ' | ' + item.data.type?.value
+                            : ''
+                        }${
+                          item.data.location?.value
+                            ? ' | ' + item.data.location?.value
+                            : ''
+                        }`}
+                      </Text>
+                    )}
+                    <View style={styles.itemDescription}>
+                      <StyledText
+                        text={item.description}
+                        styleProp={{
+                          paragraph: { fontSize: '12px' },
+                          container: { marginVertical: '2px' },
+                        }}
+                      />
+                    </View>
+                  </View>
+                ))}
+              </View>
+            )}
           </View>
 
-          <View style={styles.section}>
-            <Text style={styles.title}>{'PROJECT EXPERIENCE'}</Text>
-            <Divider />
-            {project &&
-              project.length > 0 &&
-              project.map((item, index) => (
-                <View
-                  key={`profession-${index}`}
-                  style={{ marginVertical: '8px' }}>
-                  <Text style={styles.subTitle}>{titleGenerator(item)}</Text>
-
-                  {item.data.startDate?.value && (
-                    <Text style={styles.itemSubTitle}>
-                      {`${dayjs(item.data.startDate.value).format(
-                        'MM/YYYY'
-                      )} - ${
-                        item.data.endDate?.value
-                          ? dayjs(item.data.endDate.value).format('MM/YYYY')
-                          : 'Present'
-                      }${
-                        item.data.type?.value
-                          ? ' | ' + item.data.type?.value
-                          : ''
-                      }${
-                        item.data.location?.value
-                          ? ' | ' + item.data.location?.value
-                          : ''
-                      }`}
-                    </Text>
-                  )}
-                  <View style={styles.itemDescription}>
-                    <StyledText
-                      text={item.description}
-                      styleProp={{
-                        paragraph: { fontSize: '12px' },
-                        container: { marginVertical: '2px' },
-                      }}
-                    />
-                  </View>
-                </View>
-              ))}
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.title}>{'EDUCATION'}</Text>
-            <Divider />
-            {education &&
-              education.length > 0 &&
-              education.map((item, index) => (
-                <View
-                  key={`profession-${index}`}
-                  style={{ marginVertical: '8px' }}>
-                  <Text style={styles.subTitle}>{titleGenerator(item)}</Text>
-
-                  {item.data.startDate?.value && (
-                    <Text style={styles.itemSubTitle}>
-                      {`${dayjs(item.data.startDate.value).format(
-                        'MM/YYYY'
-                      )} - ${
-                        item.data.endDate?.value
-                          ? dayjs(item.data.endDate.value).format('MM/YYYY')
-                          : 'Present'
-                      }${
-                        item.data.type?.value
-                          ? ' | ' + item.data.type?.value
-                          : ''
-                      }${
-                        item.data.location?.value
-                          ? ' | ' + item.data.location?.value
-                          : ''
-                      }`}
-                    </Text>
-                  )}
-                  <View style={styles.itemDescription}>
-                    <StyledText
-                      text={item.description}
-                      styleProp={{
-                        paragraph: { fontSize: '12px' },
-                        container: { marginVertical: '2px' },
-                      }}
-                    />
-                  </View>
-                </View>
-              ))}
-          </View>
+          <Footer />
         </Page>
       </Document>
     </PDFViewer>
@@ -328,5 +333,21 @@ const styles = StyleSheet.create({
   itemDescription: {
     fontSize: '24px',
     margin: '12px 12px 0 12px',
+  },
+  footer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  footerPageNumber: {
+    width: '100%',
+    fontSize: '12px',
+    textAlign: 'right',
+  },
+  footerLink: {
+    fontSize: '10px',
+    alignItems: 'center',
+    color: 'rgba(0, 0, 0, 0.6)',
   },
 })
