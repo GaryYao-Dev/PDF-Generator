@@ -38,7 +38,7 @@ const FileOperation: FC = () => {
   }
 
   return (
-    <div className="flex justify-between mx-4 gap-8">
+    <div className="flex justify-between mx-4 gap-8 grow">
       <button className="btn-primary w-full" onClick={() => handleSave(storedData)}>
         Save File
       </button>

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import dataReducer from './dataSlice'
+import footerSlice from './footerSlice'
 
 const store = configureStore({
   reducer: {
     data: dataReducer,
+    footer: footerSlice.reducer,
   },
 })
 

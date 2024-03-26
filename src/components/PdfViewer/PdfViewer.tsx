@@ -51,9 +51,14 @@ Font.register({
 })
 
 // const parser = (text: string) => {
-
-const PdfViewer: FC = () => {
-  // const {} = props
+interface PdfViewerProps {
+  footer: {
+    showLink: boolean
+    showPageNumber: boolean
+  }
+}
+const PdfViewer: FC<PdfViewerProps> = (props) => {
+  const { footer } = props
   const data = useAppSelector((state) => state.data)
   const { personalDetail, summary, skill, profession, education, project } =
     data
@@ -271,7 +276,7 @@ const PdfViewer: FC = () => {
             )}
           </View>
 
-          <Footer />
+          <Footer footer={footer} />
         </Page>
       </Document>
     </PDFViewer>

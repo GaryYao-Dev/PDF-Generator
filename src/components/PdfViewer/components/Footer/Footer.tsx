@@ -1,17 +1,29 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer'
 import { FC } from 'react'
-
-const Footer: FC = () => {
+interface FooterProps {
+  footer: {
+    showLink: boolean
+    showPageNumber: boolean
+  }
+}
+const Footer: FC<FooterProps> = (props) => {
+  const { showLink, showPageNumber } = props.footer
   return (
     <View style={styles.footer} fixed>
-      <Text
-        style={styles.footerPageNumber}
-        render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}
-      />
-      <Text
-        style={styles.footerLink}
-        render={() => 'This PDF is generated on https://pdfcv.ygy3389.com/'}
-      />
+      {showPageNumber && (
+        <Text
+          style={styles.footerPageNumber}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+        />
+      )}
+      {showLink && (
+        <Text
+          style={styles.footerLink}
+          render={() => 'This PDF is generated on https://pdfcv.ygy3389.com/'}
+        />
+      )}
     </View>
   )
 }
@@ -27,11 +39,11 @@ const styles = StyleSheet.create({
 
   footerPageNumber: {
     width: '100%',
-    fontSize: '12px',
+    fontSize: '10px',
     textAlign: 'right',
   },
   footerLink: {
-    fontSize: '10px',
+    fontSize: '8px',
     alignItems: 'center',
     color: 'rgba(0, 0, 0, 0.6)',
   },

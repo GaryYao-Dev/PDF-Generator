@@ -144,7 +144,6 @@ const StyledText: FC<StyledTextProps> = (props) => {
     )
     return reactElement
   }
-  console.log(text)
   const pdfComponents = transformHtmlToPdf(text)
 
   return <>{pdfComponents}</>
