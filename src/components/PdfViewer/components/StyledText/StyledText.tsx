@@ -22,7 +22,7 @@ interface StyledTextProps {
 
 const StyledText: FC<StyledTextProps> = (props) => {
   const { text, styleProp } = props
-
+  console.log('text', text)
   const styles = StyleSheet.create({
     paragraph: {},
     bold: { fontWeight: 'bold' },
@@ -118,7 +118,7 @@ const StyledText: FC<StyledTextProps> = (props) => {
               style={{
                 ...styles.paragraph,
                 ...styleProp?.paragraph,
-                marginLeft: '4px',
+                marginLeft: '80px',
               }}>
               {prefix + node.children.map(mapNodeToPdfComponent)}
             </Text>
@@ -126,6 +126,7 @@ const StyledText: FC<StyledTextProps> = (props) => {
         )
       }
     }
+    console.log('node data', node.data)
     return node.data
   }
 

@@ -178,7 +178,10 @@ const PdfViewer: FC<PdfViewerProps> = (props) => {
                       <StyledText
                         text={professionItem.description}
                         styleProp={{
-                          paragraph: { fontSize: '12px' },
+                          paragraph: {
+                            fontSize: '12px',
+                            marginVertical: '4px',
+                          },
                           container: { marginVertical: '0px' },
                           list: { marginVertical: '2px' },
                         }}
